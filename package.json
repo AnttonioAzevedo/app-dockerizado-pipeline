@@ -1,0 +1,17 @@
+{
+  "name": "app-dockerizado-pipeline",
+  "version": "1.0.0",
+  "description": "Mini API REST (Node.js + Express) usada como base para demonstrar containerização e CI/CD.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}
