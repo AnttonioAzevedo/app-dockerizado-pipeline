@@ -22,3 +22,19 @@ test('GET /tasks lists the created task', async () => {
   assert.strictEqual(res.status, 200);
   assert.ok(res.body.some((t) => t.title === 'Buy milk'));
 });
+
+test('GET /tasks/:id returns 404 for nonexistent task', async () => {
+  const res = await request(app).get('/tasks/99999');
+  assert.strictEqual(res.status, 404);
+});
+
+test('DELETE /tasks/:id removes the task and returns 204', async () => {
+  const create = await request(app).post('/tasks').send({ title: 'Temp task' });
+  const { id } = create.body;
+
+  const del = await request(app).delete(`/tasks/${id}`);
+  assert.strictEqual(del.status, 204);
+
+  const get = await request(app).get(`/tasks/${id}`);
+  assert.strictEqual(get.status, 404);
+});
