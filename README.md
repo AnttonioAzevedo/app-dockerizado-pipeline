@@ -1,13 +1,12 @@
 # app-dockerizado-pipeline
 
-Mini API REST em Node.js + Express, usada como base para demonstrar a
-containerização de uma aplicação e a automação do ciclo de build e entrega
-via CI/CD (GitHub Actions → GHCR).
+API REST em Node.js + Express para gerenciamento de tasks, containerizada
+e com pipeline de CI/CD (GitHub Actions → GHCR).
 
-## O problema que resolve
+## Como funciona
 
-Mostra, de ponta a ponta, como qualquer `push` na branch `main` gera
-automaticamente uma imagem Docker testada e publicada, pronta para deploy.
+Todo `push` na branch `main` roda os testes automaticamente e, se
+passarem, builda e publica uma nova imagem Docker pronta para deploy.
 
 ## Stack
 
@@ -56,7 +55,7 @@ push/PR → npm test
                      (tags: latest e <sha curto>)
 ```
 
-## Trade-off consciente: `node_modules` entre stages
+## Nota: `node_modules` entre stages
 
 O Dockerfile copia `node_modules` do stage `deps` para o stage final em vez
 de rodar `npm ci --omit=dev` novamente no stage final. Isso é seguro porque
